@@ -33,7 +33,7 @@ M00_L03:
        push      edx
        push      eax
        mov       ecx,esi
-       call      dword ptr ds:[5734BF0]
+       call      dword ptr ds:[2964C04]
        mov       ebx,eax
        mov       edi,edx
        mov       eax,[ebp+8]
@@ -43,7 +43,7 @@ M00_L03:
        push      edx
        push      eax
        mov       ecx,esi
-       call      dword ptr ds:[5734BF0]
+       call      dword ptr ds:[2964C04]
        add       eax,ebx
        adc       edx,edi
        pop       ebx
@@ -56,7 +56,7 @@ M00_L03:
 
 ## .NET Framework 4.8.1 (4.8.9181.0), X86 LegacyJIT
 ```assembly
-; AsyncExpert_1_Benchmark.FibonacciCalc.RecursiveWithMemoization(UInt64)
+; AsyncExpert_1_Benchmark.FibonacciCalc.RecursiveWithMemoizationDict(UInt64)
 M00_L00:
        push      ebp
        mov       ebp,esp
@@ -90,14 +90,14 @@ M00_L03:
        cmp       [ecx],al
        push      edi
        push      ebx
-       call      dword ptr ds:[2764C6C]; System.Collections.Generic.Dictionary`2[[System.UInt64, mscorlib],[System.UInt64, mscorlib]].FindEntry(UInt64)
+       call      dword ptr ds:[0FD4C6C]; System.Collections.Generic.Dictionary`2[[System.UInt64, mscorlib],[System.UInt64, mscorlib]].FindEntry(UInt64)
        test      eax,eax
        jl        short M00_L04
        mov       ecx,[esi+4]
        push      edi
        push      ebx
        cmp       [ecx],ecx
-       call      dword ptr ds:[2764BC4]; System.Collections.Generic.Dictionary`2[[System.UInt64, mscorlib],[System.UInt64, mscorlib]].get_Item(UInt64)
+       call      dword ptr ds:[0FD4BC4]; System.Collections.Generic.Dictionary`2[[System.UInt64, mscorlib],[System.UInt64, mscorlib]].get_Item(UInt64)
        lea       esp,[ebp-0C]
        pop       ebx
        pop       esi
@@ -112,7 +112,7 @@ M00_L04:
        push      edx
        push      eax
        mov       ecx,esi
-       call      dword ptr ds:[2A44BFC]
+       call      dword ptr ds:[5024C10]
        mov       [ebp-1C],eax
        mov       [ebp-18],edx
        mov       eax,ebx
@@ -122,7 +122,7 @@ M00_L04:
        push      edx
        push      eax
        mov       ecx,esi
-       call      dword ptr ds:[2A44BFC]
+       call      dword ptr ds:[5024C10]
        add       eax,[ebp-1C]
        adc       edx,[ebp-18]
        mov       [ebp-14],eax
@@ -134,7 +134,7 @@ M00_L04:
        push      dword ptr [ebp-10]
        push      dword ptr [ebp-14]
        xor       edx,edx
-       call      dword ptr ds:[2764C74]; System.Collections.Generic.Dictionary`2[[System.UInt64, mscorlib],[System.UInt64, mscorlib]].Insert(UInt64, UInt64, Boolean)
+       call      dword ptr ds:[0FD4C74]; System.Collections.Generic.Dictionary`2[[System.UInt64, mscorlib],[System.UInt64, mscorlib]].Insert(UInt64, UInt64, Boolean)
        mov       eax,[ebp-14]
        mov       edx,[ebp-10]
        lea       esp,[ebp-0C]
@@ -160,7 +160,7 @@ M00_L04:
        mov       ecx,[edi+0C]
        push      dword ptr [ebp+0C]
        push      dword ptr [ebp+8]
-       call      dword ptr ds:[2790030]
+       call      dword ptr ds:[1000030]
        and       eax,7FFFFFFF
        mov       [ebp-10],eax
        mov       esi,[edi+4]
@@ -188,7 +188,7 @@ M01_L00:
        push      dword ptr [ebp+0C]
        push      dword ptr [ebp+8]
        mov       ecx,ebx
-       call      dword ptr ds:[2790034]
+       call      dword ptr ds:[1000034]
        test      eax,eax
        je        short M01_L01
        mov       eax,esi
@@ -276,12 +276,12 @@ M02_L01:
        jne       short M03_L00
        mov       ecx,edi
        xor       edx,edx
-       call      dword ptr ds:[2764C70]; System.Collections.Generic.Dictionary`2[[System.UInt64, mscorlib],[System.UInt64, mscorlib]].Initialize(Int32)
+       call      dword ptr ds:[0FD4C70]; System.Collections.Generic.Dictionary`2[[System.UInt64, mscorlib],[System.UInt64, mscorlib]].Initialize(Int32)
 M03_L00:
        mov       ecx,[edi+0C]
        push      dword ptr [ebp+14]
        push      dword ptr [ebp+10]
-       call      dword ptr ds:[2790038]
+       call      dword ptr ds:[1000038]
        and       eax,7FFFFFFF
        mov       [ebp-14],eax
        mov       ebx,[edi+4]
@@ -312,7 +312,7 @@ M03_L01:
        push      dword ptr [esi+eax*8+10]
        push      dword ptr [ebp+14]
        push      dword ptr [ebp+10]
-       call      dword ptr ds:[279003C]
+       call      dword ptr ds:[100003C]
        test      eax,eax
        je        short M03_L03
        movzx     eax,byte ptr [ebp-10]
@@ -371,7 +371,7 @@ M03_L05:
        mov       edx,eax
        push      0
        mov       ecx,edi
-       call      dword ptr ds:[2764C7C]; System.Collections.Generic.Dictionary`2[[System.UInt64, mscorlib],[System.UInt64, mscorlib]].Resize(Int32, Boolean)
+       call      dword ptr ds:[0FD4C7C]; System.Collections.Generic.Dictionary`2[[System.UInt64, mscorlib],[System.UInt64, mscorlib]].Resize(Int32, Boolean)
        mov       eax,[ebp-14]
        mov       ebx,[edi+4]
        mov       ecx,[ebx+4]
@@ -432,7 +432,7 @@ M03_L07:
        mov       edx,[esi+4]
        push      1
        mov       ecx,edi
-       call      dword ptr ds:[2764C7C]; System.Collections.Generic.Dictionary`2[[System.UInt64, mscorlib],[System.UInt64, mscorlib]].Resize(Int32, Boolean)
+       call      dword ptr ds:[0FD4C7C]; System.Collections.Generic.Dictionary`2[[System.UInt64, mscorlib],[System.UInt64, mscorlib]].Resize(Int32, Boolean)
 M03_L08:
        lea       esp,[ebp-0C]
        pop       ebx
@@ -444,6 +444,156 @@ M03_L09:
        call      CORINFO_HELP_RNGCHKFAIL
        int       3
 ; Total bytes of code 530
+```
+
+## .NET Framework 4.8.1 (4.8.9181.0), X86 LegacyJIT
+```assembly
+; AsyncExpert_1_Benchmark.FibonacciCalc.RecursiveWithMemoizationList(UInt64)
+M00_L00:
+       push      ebp
+       mov       ebp,esp
+       push      edi
+       push      esi
+       push      ebx
+       sub       esp,18
+       mov       esi,ecx
+       mov       ebx,[ebp+8]
+       mov       edi,[ebp+0C]
+       test      edi,edi
+       jne       short M00_L01
+       cmp       ebx,1
+       je        short M00_L02
+M00_L01:
+       test      edi,edi
+       jne       short M00_L03
+       cmp       ebx,2
+       jne       short M00_L03
+M00_L02:
+       mov       eax,1
+       xor       edx,edx
+       lea       esp,[ebp-0C]
+       pop       ebx
+       pop       esi
+       pop       edi
+       pop       ebp
+       ret       8
+M00_L03:
+       mov       eax,[esi+8]
+       mov       [ebp-24],eax
+       mov       [ebp-20],ebx
+       mov       eax,ebx
+       mov       edx,[ebp-24]
+       cmp       eax,[edx+0C]
+       jb        short M00_L04
+       mov       ecx,0D
+       lea       edx,[ecx+9]
+       call      System.ThrowHelper.ThrowArgumentOutOfRangeException(System.ExceptionArgument, System.ExceptionResource)
+M00_L04:
+       mov       eax,[ebp-20]
+       mov       edx,[ebp-24]
+       mov       edx,[edx+4]
+       cmp       eax,[edx+4]
+       jae       near ptr M00_L08
+       mov       ecx,[edx+eax*8+8]
+       or        ecx,[edx+eax*8+0C]
+       je        short M00_L06
+       mov       esi,[esi+8]
+       mov       edi,ebx
+       cmp       edi,[esi+0C]
+       jb        short M00_L05
+       mov       ecx,0D
+       lea       edx,[ecx+9]
+       call      System.ThrowHelper.ThrowArgumentOutOfRangeException(System.ExceptionArgument, System.ExceptionResource)
+M00_L05:
+       mov       ecx,[esi+4]
+       cmp       edi,[ecx+4]
+       jae       near ptr M00_L08
+       mov       eax,[ecx+edi*8+8]
+       mov       edx,[ecx+edi*8+0C]
+       lea       esp,[ebp-0C]
+       pop       ebx
+       pop       esi
+       pop       edi
+       pop       ebp
+       ret       8
+M00_L06:
+       mov       eax,ebx
+       mov       edx,edi
+       sub       eax,1
+       sbb       edx,0
+       push      edx
+       push      eax
+       mov       ecx,esi
+       call      dword ptr ds:[5884C1C]
+       mov       [ebp-1C],eax
+       mov       [ebp-18],edx
+       mov       eax,ebx
+       mov       edx,edi
+       sub       eax,2
+       sbb       edx,0
+       push      edx
+       push      eax
+       mov       ecx,esi
+       call      dword ptr ds:[5884C1C]
+       add       eax,[ebp-1C]
+       adc       edx,[ebp-18]
+       mov       [ebp-14],eax
+       mov       [ebp-10],edx
+       mov       esi,[esi+8]
+       mov       edi,ebx
+       cmp       edi,[esi+0C]
+       jb        short M00_L07
+       mov       ecx,0D
+       lea       edx,[ecx+9]
+       call      System.ThrowHelper.ThrowArgumentOutOfRangeException(System.ExceptionArgument, System.ExceptionResource)
+M00_L07:
+       mov       eax,[esi+4]
+       cmp       edi,[eax+4]
+       jae       short M00_L08
+       mov       ecx,[ebp-14]
+       mov       edx,[ebp-10]
+       mov       [eax+edi*8+8],ecx
+       mov       [eax+edi*8+0C],edx
+       inc       dword ptr [esi+10]
+       mov       eax,[ebp-14]
+       mov       edx,[ebp-10]
+       lea       esp,[ebp-0C]
+       pop       ebx
+       pop       esi
+       pop       edi
+       pop       ebp
+       ret       8
+M00_L08:
+       call      CORINFO_HELP_RNGCHKFAIL
+       int       3
+; Total bytes of code 293
+```
+```assembly
+; System.ThrowHelper.ThrowArgumentOutOfRangeException(System.ExceptionArgument, System.ExceptionResource)
+       push      ebp
+       mov       ebp,esp
+       push      esi
+       sub       esp,8
+       mov       esi,edx
+       call      dword ptr ds:[70B4B2E4]; System.ThrowHelper.GetArgumentName(System.ExceptionArgument)
+       mov       [ebp-8],eax
+       mov       ecx,esi
+       call      dword ptr ds:[70C44FE4]; System.ThrowHelper.GetResourceName(System.ExceptionResource)
+       mov       [ebp-0C],eax
+       mov       ecx,offset MT_System.ArgumentOutOfRangeException
+       call      dword ptr ds:[70D89824]; CORINFO_HELP_NEWSFAST
+       mov       esi,eax
+       mov       ecx,[ebp-0C]
+       call      dword ptr ds:[709D9BB4]; System.Environment.GetResourceFromDefault(System.String)
+       push      eax
+       mov       edx,[ebp-8]
+       mov       ecx,esi
+       nop
+       call      System.ArgumentOutOfRangeException..ctor(System.String, System.String)
+       mov       ecx,esi
+       call      70D92E60
+       int       3
+; Total bytes of code 71
 ```
 
 ## .NET Framework 4.8.1 (4.8.9181.0), X86 LegacyJIT
@@ -554,7 +704,7 @@ M00_L03:
        push      edx
        push      eax
        mov       ecx,esi
-       call      dword ptr ds:[54D4BF0]
+       call      dword ptr ds:[4D94C04]
        mov       ebx,eax
        mov       edi,edx
        mov       eax,[ebp+8]
@@ -564,7 +714,7 @@ M00_L03:
        push      edx
        push      eax
        mov       ecx,esi
-       call      dword ptr ds:[54D4BF0]
+       call      dword ptr ds:[4D94C04]
        add       eax,ebx
        adc       edx,edi
        pop       ebx
@@ -577,7 +727,7 @@ M00_L03:
 
 ## .NET Framework 4.8.1 (4.8.9181.0), X86 LegacyJIT
 ```assembly
-; AsyncExpert_1_Benchmark.FibonacciCalc.RecursiveWithMemoization(UInt64)
+; AsyncExpert_1_Benchmark.FibonacciCalc.RecursiveWithMemoizationDict(UInt64)
 M00_L00:
        push      ebp
        mov       ebp,esp
@@ -611,14 +761,14 @@ M00_L03:
        cmp       [ecx],al
        push      edi
        push      ebx
-       call      dword ptr ds:[1594C6C]; System.Collections.Generic.Dictionary`2[[System.UInt64, mscorlib],[System.UInt64, mscorlib]].FindEntry(UInt64)
+       call      dword ptr ds:[884C6C]; System.Collections.Generic.Dictionary`2[[System.UInt64, mscorlib],[System.UInt64, mscorlib]].FindEntry(UInt64)
        test      eax,eax
        jl        short M00_L04
        mov       ecx,[esi+4]
        push      edi
        push      ebx
        cmp       [ecx],ecx
-       call      dword ptr ds:[1594BC4]; System.Collections.Generic.Dictionary`2[[System.UInt64, mscorlib],[System.UInt64, mscorlib]].get_Item(UInt64)
+       call      dword ptr ds:[884BC4]; System.Collections.Generic.Dictionary`2[[System.UInt64, mscorlib],[System.UInt64, mscorlib]].get_Item(UInt64)
        lea       esp,[ebp-0C]
        pop       ebx
        pop       esi
@@ -633,7 +783,7 @@ M00_L04:
        push      edx
        push      eax
        mov       ecx,esi
-       call      dword ptr ds:[5784BFC]
+       call      dword ptr ds:[4A64C10]
        mov       [ebp-1C],eax
        mov       [ebp-18],edx
        mov       eax,ebx
@@ -643,7 +793,7 @@ M00_L04:
        push      edx
        push      eax
        mov       ecx,esi
-       call      dword ptr ds:[5784BFC]
+       call      dword ptr ds:[4A64C10]
        add       eax,[ebp-1C]
        adc       edx,[ebp-18]
        mov       [ebp-14],eax
@@ -655,7 +805,7 @@ M00_L04:
        push      dword ptr [ebp-10]
        push      dword ptr [ebp-14]
        xor       edx,edx
-       call      dword ptr ds:[1594C74]; System.Collections.Generic.Dictionary`2[[System.UInt64, mscorlib],[System.UInt64, mscorlib]].Insert(UInt64, UInt64, Boolean)
+       call      dword ptr ds:[884C74]; System.Collections.Generic.Dictionary`2[[System.UInt64, mscorlib],[System.UInt64, mscorlib]].Insert(UInt64, UInt64, Boolean)
        mov       eax,[ebp-14]
        mov       edx,[ebp-10]
        lea       esp,[ebp-0C]
@@ -681,7 +831,7 @@ M00_L04:
        mov       ecx,[edi+0C]
        push      dword ptr [ebp+0C]
        push      dword ptr [ebp+8]
-       call      dword ptr ds:[15C0030]
+       call      dword ptr ds:[8C0030]
        and       eax,7FFFFFFF
        mov       [ebp-10],eax
        mov       esi,[edi+4]
@@ -709,7 +859,7 @@ M01_L00:
        push      dword ptr [ebp+0C]
        push      dword ptr [ebp+8]
        mov       ecx,ebx
-       call      dword ptr ds:[15C0034]
+       call      dword ptr ds:[8C0034]
        test      eax,eax
        je        short M01_L01
        mov       eax,esi
@@ -797,12 +947,12 @@ M02_L01:
        jne       short M03_L00
        mov       ecx,edi
        xor       edx,edx
-       call      dword ptr ds:[1594C70]; System.Collections.Generic.Dictionary`2[[System.UInt64, mscorlib],[System.UInt64, mscorlib]].Initialize(Int32)
+       call      dword ptr ds:[884C70]; System.Collections.Generic.Dictionary`2[[System.UInt64, mscorlib],[System.UInt64, mscorlib]].Initialize(Int32)
 M03_L00:
        mov       ecx,[edi+0C]
        push      dword ptr [ebp+14]
        push      dword ptr [ebp+10]
-       call      dword ptr ds:[15C0038]
+       call      dword ptr ds:[8C0038]
        and       eax,7FFFFFFF
        mov       [ebp-14],eax
        mov       ebx,[edi+4]
@@ -833,7 +983,7 @@ M03_L01:
        push      dword ptr [esi+eax*8+10]
        push      dword ptr [ebp+14]
        push      dword ptr [ebp+10]
-       call      dword ptr ds:[15C003C]
+       call      dword ptr ds:[8C003C]
        test      eax,eax
        je        short M03_L03
        movzx     eax,byte ptr [ebp-10]
@@ -892,7 +1042,7 @@ M03_L05:
        mov       edx,eax
        push      0
        mov       ecx,edi
-       call      dword ptr ds:[1594C7C]; System.Collections.Generic.Dictionary`2[[System.UInt64, mscorlib],[System.UInt64, mscorlib]].Resize(Int32, Boolean)
+       call      dword ptr ds:[884C7C]; System.Collections.Generic.Dictionary`2[[System.UInt64, mscorlib],[System.UInt64, mscorlib]].Resize(Int32, Boolean)
        mov       eax,[ebp-14]
        mov       ebx,[edi+4]
        mov       ecx,[ebx+4]
@@ -953,7 +1103,7 @@ M03_L07:
        mov       edx,[esi+4]
        push      1
        mov       ecx,edi
-       call      dword ptr ds:[1594C7C]; System.Collections.Generic.Dictionary`2[[System.UInt64, mscorlib],[System.UInt64, mscorlib]].Resize(Int32, Boolean)
+       call      dword ptr ds:[884C7C]; System.Collections.Generic.Dictionary`2[[System.UInt64, mscorlib],[System.UInt64, mscorlib]].Resize(Int32, Boolean)
 M03_L08:
        lea       esp,[ebp-0C]
        pop       ebx
@@ -965,6 +1115,156 @@ M03_L09:
        call      CORINFO_HELP_RNGCHKFAIL
        int       3
 ; Total bytes of code 530
+```
+
+## .NET Framework 4.8.1 (4.8.9181.0), X86 LegacyJIT
+```assembly
+; AsyncExpert_1_Benchmark.FibonacciCalc.RecursiveWithMemoizationList(UInt64)
+M00_L00:
+       push      ebp
+       mov       ebp,esp
+       push      edi
+       push      esi
+       push      ebx
+       sub       esp,18
+       mov       esi,ecx
+       mov       ebx,[ebp+8]
+       mov       edi,[ebp+0C]
+       test      edi,edi
+       jne       short M00_L01
+       cmp       ebx,1
+       je        short M00_L02
+M00_L01:
+       test      edi,edi
+       jne       short M00_L03
+       cmp       ebx,2
+       jne       short M00_L03
+M00_L02:
+       mov       eax,1
+       xor       edx,edx
+       lea       esp,[ebp-0C]
+       pop       ebx
+       pop       esi
+       pop       edi
+       pop       ebp
+       ret       8
+M00_L03:
+       mov       eax,[esi+8]
+       mov       [ebp-24],eax
+       mov       [ebp-20],ebx
+       mov       eax,ebx
+       mov       edx,[ebp-24]
+       cmp       eax,[edx+0C]
+       jb        short M00_L04
+       mov       ecx,0D
+       lea       edx,[ecx+9]
+       call      System.ThrowHelper.ThrowArgumentOutOfRangeException(System.ExceptionArgument, System.ExceptionResource)
+M00_L04:
+       mov       eax,[ebp-20]
+       mov       edx,[ebp-24]
+       mov       edx,[edx+4]
+       cmp       eax,[edx+4]
+       jae       near ptr M00_L08
+       mov       ecx,[edx+eax*8+8]
+       or        ecx,[edx+eax*8+0C]
+       je        short M00_L06
+       mov       esi,[esi+8]
+       mov       edi,ebx
+       cmp       edi,[esi+0C]
+       jb        short M00_L05
+       mov       ecx,0D
+       lea       edx,[ecx+9]
+       call      System.ThrowHelper.ThrowArgumentOutOfRangeException(System.ExceptionArgument, System.ExceptionResource)
+M00_L05:
+       mov       ecx,[esi+4]
+       cmp       edi,[ecx+4]
+       jae       near ptr M00_L08
+       mov       eax,[ecx+edi*8+8]
+       mov       edx,[ecx+edi*8+0C]
+       lea       esp,[ebp-0C]
+       pop       ebx
+       pop       esi
+       pop       edi
+       pop       ebp
+       ret       8
+M00_L06:
+       mov       eax,ebx
+       mov       edx,edi
+       sub       eax,1
+       sbb       edx,0
+       push      edx
+       push      eax
+       mov       ecx,esi
+       call      dword ptr ds:[57B4C1C]
+       mov       [ebp-1C],eax
+       mov       [ebp-18],edx
+       mov       eax,ebx
+       mov       edx,edi
+       sub       eax,2
+       sbb       edx,0
+       push      edx
+       push      eax
+       mov       ecx,esi
+       call      dword ptr ds:[57B4C1C]
+       add       eax,[ebp-1C]
+       adc       edx,[ebp-18]
+       mov       [ebp-14],eax
+       mov       [ebp-10],edx
+       mov       esi,[esi+8]
+       mov       edi,ebx
+       cmp       edi,[esi+0C]
+       jb        short M00_L07
+       mov       ecx,0D
+       lea       edx,[ecx+9]
+       call      System.ThrowHelper.ThrowArgumentOutOfRangeException(System.ExceptionArgument, System.ExceptionResource)
+M00_L07:
+       mov       eax,[esi+4]
+       cmp       edi,[eax+4]
+       jae       short M00_L08
+       mov       ecx,[ebp-14]
+       mov       edx,[ebp-10]
+       mov       [eax+edi*8+8],ecx
+       mov       [eax+edi*8+0C],edx
+       inc       dword ptr [esi+10]
+       mov       eax,[ebp-14]
+       mov       edx,[ebp-10]
+       lea       esp,[ebp-0C]
+       pop       ebx
+       pop       esi
+       pop       edi
+       pop       ebp
+       ret       8
+M00_L08:
+       call      CORINFO_HELP_RNGCHKFAIL
+       int       3
+; Total bytes of code 293
+```
+```assembly
+; System.ThrowHelper.ThrowArgumentOutOfRangeException(System.ExceptionArgument, System.ExceptionResource)
+       push      ebp
+       mov       ebp,esp
+       push      esi
+       sub       esp,8
+       mov       esi,edx
+       call      dword ptr ds:[70B4B2E4]; System.ThrowHelper.GetArgumentName(System.ExceptionArgument)
+       mov       [ebp-8],eax
+       mov       ecx,esi
+       call      dword ptr ds:[70C44FE4]; System.ThrowHelper.GetResourceName(System.ExceptionResource)
+       mov       [ebp-0C],eax
+       mov       ecx,offset MT_System.ArgumentOutOfRangeException
+       call      dword ptr ds:[70D89824]; CORINFO_HELP_NEWSFAST
+       mov       esi,eax
+       mov       ecx,[ebp-0C]
+       call      dword ptr ds:[709D9BB4]; System.Environment.GetResourceFromDefault(System.String)
+       push      eax
+       mov       edx,[ebp-8]
+       mov       ecx,esi
+       nop
+       call      System.ArgumentOutOfRangeException..ctor(System.String, System.String)
+       mov       ecx,esi
+       call      70D92E60
+       int       3
+; Total bytes of code 71
 ```
 
 ## .NET Framework 4.8.1 (4.8.9181.0), X86 LegacyJIT

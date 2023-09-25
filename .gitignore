@@ -398,6 +398,13 @@ FodyWeavers.xsd
 *.sln.iml
 
 
+# Useless files ignore
+
+#*/Properties
+#*/*.config
+#*/*.sln
+#*/*.csproj
+
 
 # Results exception 
 

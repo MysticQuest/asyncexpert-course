@@ -13,7 +13,14 @@ namespace AsyncExpert_1_Benchmark
         // 3. Run with release configuration and compare results
         // 4. Open disassembler report and compare machine code
 
-        private Dictionary<ulong, ulong> memo = new Dictionary<ulong, ulong>();
+        private Dictionary<ulong, ulong> memo1 = new Dictionary<ulong, ulong>();
+        List<ulong> memo2;
+
+        public FibonacciCalc()
+        {
+            const ulong maxN = 35;
+            memo2 = new List<ulong>(new ulong[maxN + 1]);
+        }
 
         [Benchmark(Baseline = true)]
         [ArgumentsSource(nameof(Data))]
@@ -25,13 +32,25 @@ namespace AsyncExpert_1_Benchmark
 
         [Benchmark]
         [ArgumentsSource(nameof(Data))]
-        public ulong RecursiveWithMemoization(ulong n)
+        public ulong RecursiveWithMemoizationDict(ulong n)
         {
             if (n == 1 || n == 2) return 1;
-            if (memo.ContainsKey(n)) return memo[n];
+            if (memo1.ContainsKey(n)) return memo1[n];
 
-            ulong result = RecursiveWithMemoization(n - 1) + RecursiveWithMemoization(n - 2);
-            memo[n] = result;
+            ulong result = RecursiveWithMemoizationDict(n - 1) + RecursiveWithMemoizationDict(n - 2);
+            memo1[n] = result;
+            return result;
+        }
+
+        [Benchmark]
+        [ArgumentsSource(nameof(Data))]
+        public ulong RecursiveWithMemoizationList(ulong n)
+        {
+            if (n == 1 || n == 2) return 1;
+            if (memo2[(int)n] != 0) return memo2[(int)n];
+
+            ulong result = RecursiveWithMemoizationList(n - 1) + RecursiveWithMemoizationList(n - 2);
+            memo2[(int)n] = result; 
             return result;
         }
 
