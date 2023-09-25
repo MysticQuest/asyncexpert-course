@@ -398,4 +398,4 @@ FodyWeavers.xsd
 *.sln.iml
 
 # Results exception 
-/*/bin/Release/BenchmarkDotNet.Artifacts/results/
+!/*/bin/Release/BenchmarkDotNet.Artifacts/results/
