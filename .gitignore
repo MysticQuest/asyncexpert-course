@@ -411,6 +411,9 @@ FodyWeavers.xsd
 */bin/Release/BenchmarkDotNet.Artifacts/*
 !*/bin/Release/BenchmarkDotNet.Artifacts/results
 
+*/bin/Release/BenchmarkDotNet.Artifacts/results/*
+!*/bin/Release/BenchmarkDotNet.Artifacts/results/*.md
+
 
 # Testing alternative method
 
