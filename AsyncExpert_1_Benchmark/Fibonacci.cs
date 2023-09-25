@@ -12,6 +12,8 @@ namespace AsyncExpert_1_Benchmark
         // 3. Run with release configuration and compare results
         // 4. Open disassembler report and compare machine code
 
+        private Dictionary<ulong, ulong> memo = new Dictionary<ulong, ulong>();
+
         [Benchmark(Baseline = true)]
         [ArgumentsSource(nameof(Data))]
         public ulong Recursive(ulong n)
