@@ -399,22 +399,22 @@ FodyWeavers.xsd
 
 
 
-
-
-
 # Results exception 
 
-bin/*
-!bin/Release/
+!*/bin/
+*/bin/*
+!*/bin/Release/
 
-bin/Release/*
-!bin/Release/BenchmarkDotNet.Artifacts/
+*/bin/Release/*
+!*/bin/Release/BenchmarkDotNet.Artifacts/
 
-bin/Release/BenchmarkDotNet.Artifacts/*
-!bin/Release/BenchmarkDotNet.Artifacts/results
+*/bin/Release/BenchmarkDotNet.Artifacts/*
+!*/bin/Release/BenchmarkDotNet.Artifacts/results
 
 
-#bin/**
-#!bin/**/
+# Testing alternative method
 
-#!bin/Release/BenchmarkDotNet.Artifacts/results/*
+#*/bin/**
+#*/!bin/**/
+
+#!*/bin/Release/BenchmarkDotNet.Artifacts/results/
