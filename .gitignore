@@ -397,5 +397,24 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
+
+
+
+
+
 # Results exception 
-!/*/bin/Release/BenchmarkDotNet.Artifacts/results/
+
+#bin/*
+#!bin/Release/
+
+#bin/Release/*
+#!bin/Release/BenchmarkDotNet.Artifacts/
+
+#bin/Release/BenchmarkDotNet.Artifacts/*
+#!bin/Release/BenchmarkDotNet.Artifacts/results
+
+
+bin/**
+!bin/**/
+
+!bin/Release/BenchmarkDotNet.Artifacts/results/*
