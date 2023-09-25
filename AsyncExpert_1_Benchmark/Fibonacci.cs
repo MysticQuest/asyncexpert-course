@@ -26,14 +26,32 @@ namespace AsyncExpert_1_Benchmark
         [ArgumentsSource(nameof(Data))]
         public ulong RecursiveWithMemoization(ulong n)
         {
-            return 0;
+            if (n == 1 || n == 2) return 1;
+            if (memo.ContainsKey(n)) return memo[n];
+
+            ulong result = RecursiveWithMemoization(n - 1) + RecursiveWithMemoization(n - 2);
+            memo[n] = result;
+            return result;
         }
 
         [Benchmark]
         [ArgumentsSource(nameof(Data))]
         public ulong Iterative(ulong n)
         {
-            return 0;
+            if (n == 0) return 0;
+            if (n == 1) return 1;
+
+            ulong a = 0;
+            ulong b = 1;
+
+            for (ulong i = 2; i <= n; i++)
+            {
+                ulong temp = a + b;
+                a = b;
+                b = temp;
+            }
+
+            return b;
         }
 
         public IEnumerable<ulong> Data()
