@@ -2,7 +2,7 @@
 using System.Reflection;
 using BenchmarkDotNet.Running;
 
-namespace AsyncExpert_1_Benchmark
+namespace BenchmarkDotNet
 {
     internal class Program
     {
