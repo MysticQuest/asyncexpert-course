@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BenchmarkDotNet", "BenchmarkDotNet.csproj", "{AD1F0B59-F82C-40BF-A0E2-D883C21B0085}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThreadPoolExercises.Core", "ThreadPoolExercises.Core\ThreadPoolExercises.Core.csproj", "{FB7F6DCE-2F27-4B90-AD59-E6C71D44A01C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AD1F0B59-F82C-40BF-A0E2-D883C21B0085}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AD1F0B59-F82C-40BF-A0E2-D883C21B0085}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AD1F0B59-F82C-40BF-A0E2-D883C21B0085}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AD1F0B59-F82C-40BF-A0E2-D883C21B0085}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB7F6DCE-2F27-4B90-AD59-E6C71D44A01C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB7F6DCE-2F27-4B90-AD59-E6C71D44A01C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB7F6DCE-2F27-4B90-AD59-E6C71D44A01C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB7F6DCE-2F27-4B90-AD59-E6C71D44A01C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {D98B6A4A-E94D-4FC2-BFC7-21EF3A0D6487}
+		SolutionGuid = {9DD73ADD-E755-464C-8E9A-B91A6D5873B0}
 	EndGlobalSection
 EndGlobal
