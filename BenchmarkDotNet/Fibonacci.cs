@@ -7,12 +7,6 @@ namespace AsyncExpert_1_Benchmark
     [DisassemblyDiagnoser(exportCombinedDisassemblyReport: true)]
     public class FibonacciCalc
     {
-        // Objectives:
-        // 1. Write implementations for RecursiveWithMemoization and Iterative solutions
-        // 2. Add MemoryDiagnoser to the benchmark
-        // 3. Run with release configuration and compare results
-        // 4. Open disassembler report and compare machine code
-
         private Dictionary<ulong, ulong> memo1 = new Dictionary<ulong, ulong>();
         List<ulong> memo2;
 
