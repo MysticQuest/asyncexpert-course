@@ -427,7 +427,7 @@ FodyWeavers.xsd
 # Case when the project is not direct child
 
 !*/*/
-*/*/
+*/*/*
 !*/*/bin/
 
 !*/*/bin/
