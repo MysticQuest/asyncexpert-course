@@ -10,6 +10,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThreadPoolExercises.Tests", "ThreadPoolExercises.Tests\ThreadPoolExercises.Tests.csproj", "{FB2084BB-5D6C-4C90-8FD9-EF27CF424294}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThreadPoolExercises.Benchmarks", "ThreadPoolExercises.Benchmarks\ThreadPoolExercises.Benchmarks.csproj", "{003A3A9F-5A99-441B-836D-5E06B195EF5A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FB7F6DCE-2F27-4B90-AD59-E6C71D44A01C} = {FB7F6DCE-2F27-4B90-AD59-E6C71D44A01C}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
