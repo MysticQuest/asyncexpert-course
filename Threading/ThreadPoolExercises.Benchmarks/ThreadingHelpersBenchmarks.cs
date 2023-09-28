@@ -15,7 +15,7 @@ namespace ThreadPoolExercises.Benchmarks
         [GlobalSetup]
         public void Setup()
         {
-            data = new byte[1000];
+            data = new byte[1000000000];
             new Random(42).NextBytes(data);
         }
 
