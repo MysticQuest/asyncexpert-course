@@ -14,13 +14,11 @@ namespace ThreadPoolExercises.Benchmarks
         [GlobalSetup]
         public void Setup()
         {
-            // Create a ConcurrentBag to hold the data chunks
             dataChunks = new ConcurrentBag<byte[]>();
 
-            // Create 10 chunks of 1 million bytes each, for a total of 10 million bytes
             for (int i = 0; i < 100; i++)
             {
-                byte[] chunk = new byte[1000000];
+                byte[] chunk = new byte[10000000];
                 new Random(42 + i).NextBytes(chunk);
                 dataChunks.Add(chunk);
             }
