@@ -408,6 +408,8 @@ FodyWeavers.xsd
 
 # Results exception 
 
+# Case when the project is direct child
+
 !*/bin/
 */bin/*
 !*/bin/Release/
@@ -420,6 +422,22 @@ FodyWeavers.xsd
 
 */bin/Release/BenchmarkDotNet.Artifacts/results/*
 !*/bin/Release/BenchmarkDotNet.Artifacts/results/*.md
+
+
+# Case when the project is not direct child
+
+!*/*/bin/
+*/*/bin/*
+!*/*/bin/Release/
+
+*/*/bin/Release/*
+!*/*/bin/Release/BenchmarkDotNet.Artifacts/
+
+*/*/bin/Release/BenchmarkDotNet.Artifacts/*
+!*/*/bin/Release/BenchmarkDotNet.Artifacts/results
+
+*/*/bin/Release/BenchmarkDotNet.Artifacts/results/*
+!*/*/bin/Release/BenchmarkDotNet.Artifacts/results/*.md
 
 
 # Testing alternative method

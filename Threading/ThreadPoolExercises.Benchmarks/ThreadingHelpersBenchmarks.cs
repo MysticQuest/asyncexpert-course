@@ -3,29 +3,52 @@ using System.Collections.Concurrent;
 using System.Security.Cryptography;
 using BenchmarkDotNet.Attributes;
 using ThreadPoolExercises.Core;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ThreadPoolExercises.Benchmarks
 {
     public class ThreadingHelpersBenchmarks
     {
         private SHA256 sha256 = SHA256.Create();
-        private ConcurrentBag<byte[]> dataChunks;
+
+        private byte[] data = new byte[10000000];
+        private ConcurrentBag<byte[]> dataChunks = new ConcurrentBag<byte[]>();
+        private byte[] chunk = new byte[10000000];
+
+        public ThreadingHelpersBenchmarks()
+        {
+            Setup();
+        }
 
         [GlobalSetup]
         public void Setup()
         {
-            dataChunks = new ConcurrentBag<byte[]>();
+            new Random(42).NextBytes(data);
 
             for (int i = 0; i < 100; i++)
             {
-                byte[] chunk = new byte[10000000];
                 new Random(42 + i).NextBytes(chunk);
                 dataChunks.Add(chunk);
             }
         }
 
         [Benchmark]
-        public void ExecuteSynchronously()
+        public void ExecuteSynchronously() => sha256.ComputeHash(data);
+
+        [Benchmark]
+        public void ExecuteOnThread()
+        {
+            ThreadingHelpers.ExecuteOnThread(() => sha256.ComputeHash(data), 1);
+        }
+
+        [Benchmark]
+        public void ExecuteOnThreadPool()
+        {
+            ThreadingHelpers.ExecuteOnThreadPool(() => sha256.ComputeHash(data), 1);
+        }
+
+        [Benchmark]
+        public void M_ExecuteSynchronously()
         {
             foreach (var chunk in dataChunks)
             {
@@ -34,7 +57,7 @@ namespace ThreadPoolExercises.Benchmarks
         }
 
         [Benchmark]
-        public void ExecuteOnThread()
+        public void M_ExecuteOnThread()
         {
             ThreadingHelpers.ExecuteOnThread(() =>
             {
@@ -46,7 +69,7 @@ namespace ThreadPoolExercises.Benchmarks
         }
 
         [Benchmark]
-        public void ExecuteOnThreadPool()
+        public void M_ExecuteOnThreadPool()
         {
             ThreadingHelpers.ExecuteOnThreadPool(() =>
             {
@@ -58,7 +81,7 @@ namespace ThreadPoolExercises.Benchmarks
         }
 
         [Benchmark]
-        public async Task ExecuteOnThreadPool_Tasks()
+        public async Task M_ExecuteOnThreadPool_Tasks()
         {
             await ThreadingHelpers.ExecuteOnThreadPool_Tasks(() =>
             {
