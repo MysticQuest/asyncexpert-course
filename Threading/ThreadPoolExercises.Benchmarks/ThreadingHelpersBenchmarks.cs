@@ -11,9 +11,9 @@ namespace ThreadPoolExercises.Benchmarks
     {
         private SHA256 sha256 = SHA256.Create();
 
-        private byte[] data = new byte[10000000];
+        private byte[] data = new byte[1000000];
         private ConcurrentBag<byte[]> dataChunks = new ConcurrentBag<byte[]>();
-        private byte[] chunk = new byte[10000000];
+        private byte[] chunk = new byte[1000000];
 
         public ThreadingHelpersBenchmarks()
         {
@@ -25,7 +25,7 @@ namespace ThreadPoolExercises.Benchmarks
         {
             new Random(42).NextBytes(data);
 
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 10; i++)
             {
                 new Random(42 + i).NextBytes(chunk);
                 dataChunks.Add(chunk);
@@ -33,26 +33,35 @@ namespace ThreadPoolExercises.Benchmarks
         }
 
         [Benchmark]
-        public void ExecuteSynchronously() => sha256.ComputeHash(data);
+        public void ExecuteSynchronously() 
+        {
+            for (int i = 0; i < 200; i++)
+            {
+                sha256.ComputeHash(data);
+            }
+        }
 
-        [Benchmark]
+    [Benchmark]
         public void ExecuteOnThread()
         {
-            ThreadingHelpers.ExecuteOnThread(() => sha256.ComputeHash(data), 1);
+            ThreadingHelpers.ExecuteOnThread(() => sha256.ComputeHash(data), 200);
         }
 
         [Benchmark]
         public void ExecuteOnThreadPool()
         {
-            ThreadingHelpers.ExecuteOnThreadPool(() => sha256.ComputeHash(data), 1);
+            ThreadingHelpers.ExecuteOnThreadPool(() => sha256.ComputeHash(data), 200);
         }
 
         [Benchmark]
         public void M_ExecuteSynchronously()
         {
-            foreach (var chunk in dataChunks)
+            for (int i = 0; i < 200; i++)
             {
-                sha256.ComputeHash(chunk);
+                foreach (var chunk in dataChunks)
+                {
+                    sha256.ComputeHash(chunk);
+                }
             }
         }
 
@@ -65,7 +74,7 @@ namespace ThreadPoolExercises.Benchmarks
                 {
                     sha256.ComputeHash(chunk);
                 });
-            }, 1);
+            }, 200);
         }
 
         [Benchmark]
@@ -77,7 +86,7 @@ namespace ThreadPoolExercises.Benchmarks
                 {
                     sha256.ComputeHash(chunk);
                 });
-            }, 1);
+            }, 200);
         }
 
         [Benchmark]
@@ -89,7 +98,7 @@ namespace ThreadPoolExercises.Benchmarks
                 {
                     sha256.ComputeHash(chunk);
                 });
-            }, 1);
+            }, 200);
         }
     }
 }
