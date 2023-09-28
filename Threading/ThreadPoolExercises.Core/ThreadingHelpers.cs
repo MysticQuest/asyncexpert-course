@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Threading;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Timers;
 
 namespace ThreadPoolExercises.Core
 {
@@ -66,11 +68,41 @@ namespace ThreadPoolExercises.Core
                 }
                 finally
                 {
-                    autoEvent.Set();  // Signal the completion of the work item
+                    autoEvent.Set();  // signal the completion of the work item
                 }
             });
 
-            autoEvent.WaitOne();  // Wait for the signal that the work item is complete
+            autoEvent.WaitOne();  //wait for the signal that the work item is complete
+        }
+
+
+        public static async Task ExecuteOnThreadPool_Tasks(Action action, int repeats, CancellationToken token = default, Action<Exception>? errorAction = null)
+        {
+            Task workTask = Task.Run(() =>
+            {
+                for (int i = 0; i < repeats; i++)
+                {
+                    token.ThrowIfCancellationRequested();
+                    try
+                    {
+                        action();
+                    }
+                    catch (Exception ex)
+                    {
+                        errorAction?.Invoke(ex);
+                    }
+                }
+            }, token);  // pass the CancellationToken to Task.Run
+
+            try
+            {
+                // await any exceptions and wait for completion
+                await workTask;
+            }
+            catch (OperationCanceledException)
+            {
+                errorAction?.Invoke(new OperationCanceledException("Operation was canceled", token));
+            }
         }
     }
 }
