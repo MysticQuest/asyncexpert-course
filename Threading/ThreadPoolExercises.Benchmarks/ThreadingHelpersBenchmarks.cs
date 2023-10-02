@@ -11,7 +11,7 @@ namespace ThreadPoolExercises.Benchmarks
     {
         private SHA256 sha256 = SHA256.Create();
 
-        private byte[] data = new byte[100000];
+        private byte[] data = new byte[100000000];
         private ConcurrentBag<byte[]> dataChunks = new ConcurrentBag<byte[]>();
         private byte[] chunk = new byte[100000];
 
@@ -37,10 +37,7 @@ namespace ThreadPoolExercises.Benchmarks
         {
             for (int i = 0; i < 100; i++)
             {
-                foreach (var chunk in dataChunks)
-                {
-                    sha256.ComputeHash(chunk);
-                }
+                sha256.ComputeHash(data);
             }
         }
 

@@ -13,30 +13,25 @@ namespace ThreadPoolExercises.Core
             //   HINT: you may use `Join` to wait until created Thread finishes
             // * In a loop, check whether `token` is not cancelled
             // * If an `action` throws and exception (or token has been cancelled) - `errorAction` should be invoked (if provided)
-
-            Thread thread = new Thread(() =>
+            
+            for (int i = 0; i < repeats; i++)
             {
-                try
+                var thread = new Thread(_ =>
                 {
-                    for (int i = 0; i < repeats; i++)
+                    try
                     {
                         token.ThrowIfCancellationRequested();
                         action();
                     }
-                }
-                catch (Exception ex) when (ex is not OperationCanceledException)
-                {
-                    errorAction?.Invoke(ex);
-                }
-                catch (OperationCanceledException)
-                {
-                    errorAction?.Invoke(new OperationCanceledException("Operation was canceled", token));
-                }
-            });
+                    catch (Exception ex)
+                    {
+                        errorAction?.Invoke(ex);
+                    }
+                });
 
-            thread.Start();
-            thread.Join();
-
+                thread.Start();
+                thread.Join();
+            }
         }
 
         public static void ExecuteOnThreadPool(Action action, int repeats, CancellationToken token = default, Action<Exception>? errorAction = null)
@@ -48,51 +43,46 @@ namespace ThreadPoolExercises.Core
 
             AutoResetEvent autoEvent = new AutoResetEvent(false);
 
-            ThreadPool.QueueUserWorkItem(_ =>
+            for (int i = 0; i < repeats; i++)
             {
-                try
+                ThreadPool.QueueUserWorkItem(_ =>
                 {
-                    for (int i = 0; i < repeats; i++)
+                    try
                     {
                         token.ThrowIfCancellationRequested();
                         action();
                     }
-                }
-                catch (Exception ex) when (ex is not OperationCanceledException)
-                {
-                    errorAction?.Invoke(ex);
-                }
-                catch (OperationCanceledException)
-                {
-                    errorAction?.Invoke(new OperationCanceledException("Operation was canceled", token));
-                }
-                finally
-                {
-                    autoEvent.Set();  // signal the completion of the work item
-                }
-            });
-
-            autoEvent.WaitOne();  //wait for the signal that the work item is complete
+                    catch (Exception ex)
+                    {
+                        errorAction?.Invoke(ex);
+                    }
+                    finally
+                    {
+                        autoEvent.Set();
+                    }
+                });
+                autoEvent.WaitOne();
+            }
         }
 
 
         public static async Task ExecuteOnThreadPool_Tasks(Action action, int repeats, CancellationToken token = default, Action<Exception>? errorAction = null)
         {
-            await Task.Run(() =>
+            for (int i = 0; i < repeats; i++)
             {
-                try
+                await Task.Run(() =>
                 {
-                    for (int i = 0; i < repeats; i++)
+                    try
                     {
                         token.ThrowIfCancellationRequested();
                         action();
                     }
-                }
-                catch (Exception ex)
-                {
-                    errorAction?.Invoke(ex);
-                }
-            }, token);  // pass the CancellationToken to Task.Run
+                    catch (Exception ex)
+                    {
+                        errorAction?.Invoke(ex);
+                    }
+                }, token);
+            }
         }
     }
 }

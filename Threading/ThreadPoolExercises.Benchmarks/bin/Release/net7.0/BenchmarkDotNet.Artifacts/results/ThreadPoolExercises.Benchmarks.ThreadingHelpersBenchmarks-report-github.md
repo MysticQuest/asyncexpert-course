@@ -10,10 +10,11 @@ AMD Ryzen 5 3600, 1 CPU, 12 logical and 6 physical cores
 ```
 | Method                      | Mean        | Error     | StdDev    |
 |---------------------------- |------------:|----------:|----------:|
-| ExecuteSynchronously        | 79,644.2 μs | 610.77 μs | 510.02 μs |
-| ExecuteOnThread             | 89,168.9 μs | 490.07 μs | 409.23 μs |
-| ExecuteOnThreadPool         | 81,603.9 μs | 725.22 μs | 678.37 μs |
-| ExecuteOnThreadPool_Tasks   | 79,588.7 μs | 162.07 μs | 151.60 μs |
-| M_ExecuteOnThread           |    878.9 μs |  15.29 μs |  21.92 μs |
-| M_ExecuteOnThreadPool       |    821.4 μs |  16.07 μs |  26.40 μs |
-| M_ExecuteOnThreadPool_Tasks |    832.8 μs |  16.59 μs |  23.80 μs |
+| ExecuteSynchronously        | 5,007.43 ms | 18.997 ms | 16.840 ms |
+| ExecuteOnThread             | 4,989.82 ms | 14.250 ms | 13.330 ms |
+| ExecuteOnThreadPool         | 4,988.54 ms | 26.619 ms | 23.597 ms |
+| ExecuteOnThreadPool_Tasks   | 4,952.91 ms | 16.430 ms | 13.720 ms |
+| M_ExecuteSynchronously      |   198.78 ms |  0.850 ms |  0.795 ms |
+| M_ExecuteOnThread           |    41.65 ms |  0.669 ms |  0.522 ms |
+| M_ExecuteOnThreadPool       |    29.16 ms |  0.221 ms |  0.206 ms |
+| M_ExecuteOnThreadPool_Tasks |    28.35 ms |  0.348 ms |  0.308 ms |
