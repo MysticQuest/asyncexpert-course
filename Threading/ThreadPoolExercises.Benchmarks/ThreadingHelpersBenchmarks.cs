@@ -11,9 +11,9 @@ namespace ThreadPoolExercises.Benchmarks
     {
         private SHA256 sha256 = SHA256.Create();
 
-        private byte[] data = new byte[1000000];
+        private byte[] data = new byte[100000];
         private ConcurrentBag<byte[]> dataChunks = new ConcurrentBag<byte[]>();
-        private byte[] chunk = new byte[1000000];
+        private byte[] chunk = new byte[100000];
 
         public ThreadingHelpersBenchmarks()
         {
@@ -25,7 +25,7 @@ namespace ThreadPoolExercises.Benchmarks
         {
             new Random(42).NextBytes(data);
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 20; i++)
             {
                 new Random(42 + i).NextBytes(chunk);
                 dataChunks.Add(chunk);
@@ -35,28 +35,37 @@ namespace ThreadPoolExercises.Benchmarks
         [Benchmark]
         public void ExecuteSynchronously() 
         {
-            for (int i = 0; i < 200; i++)
+            for (int i = 0; i < 100; i++)
             {
-                sha256.ComputeHash(data);
+                foreach (var chunk in dataChunks)
+                {
+                    sha256.ComputeHash(chunk);
+                }
             }
         }
 
-    [Benchmark]
+        [Benchmark]
         public void ExecuteOnThread()
         {
-            ThreadingHelpers.ExecuteOnThread(() => sha256.ComputeHash(data), 200);
+            ThreadingHelpers.ExecuteOnThread(() => sha256.ComputeHash(data), 100);
         }
 
         [Benchmark]
         public void ExecuteOnThreadPool()
         {
-            ThreadingHelpers.ExecuteOnThreadPool(() => sha256.ComputeHash(data), 200);
+            ThreadingHelpers.ExecuteOnThreadPool(() => sha256.ComputeHash(data), 100);
+        }
+
+        [Benchmark]
+        public async Task ExecuteOnThreadPool_Tasks()
+        {
+            await ThreadingHelpers.ExecuteOnThreadPool_Tasks(() => sha256.ComputeHash(data), 100);
         }
 
         [Benchmark]
         public void M_ExecuteSynchronously()
         {
-            for (int i = 0; i < 200; i++)
+            for (int i = 0; i < 100; i++)
             {
                 foreach (var chunk in dataChunks)
                 {
@@ -74,7 +83,7 @@ namespace ThreadPoolExercises.Benchmarks
                 {
                     sha256.ComputeHash(chunk);
                 });
-            }, 200);
+            }, 100);
         }
 
         [Benchmark]
@@ -86,21 +95,19 @@ namespace ThreadPoolExercises.Benchmarks
                 {
                     sha256.ComputeHash(chunk);
                 });
-            }, 200);
+            }, 100);
         }
-
-        ParallelOptions parallelOptions = new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount };
 
         [Benchmark]
         public async Task M_ExecuteOnThreadPool_Tasks()
         {
             await ThreadingHelpers.ExecuteOnThreadPool_Tasks(() =>
             {
-                Parallel.ForEach(dataChunks, parallelOptions, chunk =>
+                Parallel.ForEach(dataChunks, chunk =>
                 {
                     sha256.ComputeHash(chunk);
                 });
-            }, 200);
+            }, 100);
         }
     }
 }

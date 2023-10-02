@@ -78,31 +78,21 @@ namespace ThreadPoolExercises.Core
 
         public static async Task ExecuteOnThreadPool_Tasks(Action action, int repeats, CancellationToken token = default, Action<Exception>? errorAction = null)
         {
-            Task workTask = Task.Run(() =>
+            await Task.Run(() =>
             {
-                for (int i = 0; i < repeats; i++)
+                try
                 {
-                    token.ThrowIfCancellationRequested();
-                    try
+                    for (int i = 0; i < repeats; i++)
                     {
+                        token.ThrowIfCancellationRequested();
                         action();
                     }
-                    catch (Exception ex)
-                    {
-                        errorAction?.Invoke(ex);
-                    }
+                }
+                catch (Exception ex)
+                {
+                    errorAction?.Invoke(ex);
                 }
             }, token);  // pass the CancellationToken to Task.Run
-
-            try
-            {
-                // await any exceptions and wait for completion
-                await workTask;
-            }
-            catch (OperationCanceledException)
-            {
-                errorAction?.Invoke(new OperationCanceledException("Operation was canceled", token));
-            }
         }
     }
 }
