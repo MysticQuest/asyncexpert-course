@@ -89,12 +89,14 @@ namespace ThreadPoolExercises.Benchmarks
             }, 200);
         }
 
+        ParallelOptions parallelOptions = new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount };
+
         [Benchmark]
         public async Task M_ExecuteOnThreadPool_Tasks()
         {
             await ThreadingHelpers.ExecuteOnThreadPool_Tasks(() =>
             {
-                Parallel.ForEach(dataChunks, chunk =>
+                Parallel.ForEach(dataChunks, parallelOptions, chunk =>
                 {
                     sha256.ComputeHash(chunk);
                 });
