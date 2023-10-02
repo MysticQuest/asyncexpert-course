@@ -23,6 +23,10 @@ namespace ThreadPoolExercises.Core
                         token.ThrowIfCancellationRequested();
                         action();
                     }
+                    catch (OperationCanceledException)
+                    {
+                        throw new OperationCanceledException();
+                    }
                     catch (Exception ex)
                     {
                         errorAction?.Invoke(ex);
@@ -52,6 +56,10 @@ namespace ThreadPoolExercises.Core
                         token.ThrowIfCancellationRequested();
                         action();
                     }
+                    catch (OperationCanceledException)
+                    {
+                        throw new OperationCanceledException();
+                    }
                     catch (Exception ex)
                     {
                         errorAction?.Invoke(ex);
@@ -76,6 +84,10 @@ namespace ThreadPoolExercises.Core
                     {
                         token.ThrowIfCancellationRequested();
                         action();
+                    }
+                    catch (OperationCanceledException)
+                    {
+                        throw new OperationCanceledException();
                     }
                     catch (Exception ex)
                     {
