@@ -13,29 +13,29 @@ namespace ThreadPoolExercises.Core
             //   HINT: you may use `Join` to wait until created Thread finishes
             // * In a loop, check whether `token` is not cancelled
             // * If an `action` throws and exception (or token has been cancelled) - `errorAction` should be invoked (if provided)
-            
-            for (int i = 0; i < repeats; i++)
+           
+            var thread = new Thread(_ =>
             {
-                var thread = new Thread(_ =>
+                try
                 {
-                    try
+                    for (int i = 0; i < repeats; i++)
                     {
                         token.ThrowIfCancellationRequested();
                         action();
                     }
-                    catch (OperationCanceledException)
-                    {
-                        throw new OperationCanceledException();
-                    }
-                    catch (Exception ex)
-                    {
-                        errorAction?.Invoke(ex);
-                    }
-                });
+                }
+                catch (Exception ex) when (ex is not OperationCanceledException)
+                {
+                    errorAction?.Invoke(ex);
+                }
+                catch (OperationCanceledException)
+                {
+                    errorAction?.Invoke(new OperationCanceledException("Operation was canceled", token));
+                }
+            });
 
-                thread.Start();
-                thread.Join();
-            }
+            thread.Start();
+            thread.Join();
         }
 
         public static void ExecuteOnThreadPool(Action action, int repeats, CancellationToken token = default, Action<Exception>? errorAction = null)
@@ -47,54 +47,55 @@ namespace ThreadPoolExercises.Core
 
             AutoResetEvent autoEvent = new AutoResetEvent(false);
 
-            for (int i = 0; i < repeats; i++)
+            ThreadPool.QueueUserWorkItem(_ =>
             {
-                ThreadPool.QueueUserWorkItem(_ =>
+                try
                 {
-                    try
+                    for (int i = 0; i < repeats; i++)
                     {
                         token.ThrowIfCancellationRequested();
                         action();
                     }
-                    catch (OperationCanceledException)
-                    {
-                        throw new OperationCanceledException();
-                    }
-                    catch (Exception ex)
-                    {
-                        errorAction?.Invoke(ex);
-                    }
-                    finally
-                    {
-                        autoEvent.Set();
-                    }
-                });
-                autoEvent.WaitOne();
-            }
+                }
+                catch (Exception ex) when (ex is not OperationCanceledException)
+                {
+                    errorAction?.Invoke(ex);
+                }
+                catch (OperationCanceledException)
+                {
+                    errorAction?.Invoke(new OperationCanceledException("Operation was canceled", token));
+                }
+                finally
+                {
+                    autoEvent.Set();  // Signal the completion of the work item
+                }
+            });
+
+            autoEvent.WaitOne();  // Wait for the signal that the work item is complete
         }
 
 
         public static async Task ExecuteOnThreadPool_Tasks(Action action, int repeats, CancellationToken token = default, Action<Exception>? errorAction = null)
         {
-            for (int i = 0; i < repeats; i++)
+            await Task.Run(() =>
             {
-                await Task.Run(() =>
+                try
                 {
-                    try
+                    for (int i = 0; i < repeats; i++)
                     {
                         token.ThrowIfCancellationRequested();
                         action();
                     }
-                    catch (OperationCanceledException)
-                    {
-                        throw new OperationCanceledException();
-                    }
-                    catch (Exception ex)
-                    {
-                        errorAction?.Invoke(ex);
-                    }
-                }, token);
-            }
+                }
+                catch (Exception ex) when (ex is not OperationCanceledException)
+                {
+                    errorAction?.Invoke(ex);
+                }
+                catch (OperationCanceledException)
+                {
+                    errorAction?.Invoke(new OperationCanceledException("Operation was canceled", token));
+                }
+            }, token);
         }
     }
 }

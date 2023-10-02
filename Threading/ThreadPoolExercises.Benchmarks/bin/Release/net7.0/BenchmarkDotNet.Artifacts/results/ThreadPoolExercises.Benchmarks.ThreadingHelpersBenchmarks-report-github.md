@@ -8,13 +8,13 @@ AMD Ryzen 5 3600, 1 CPU, 12 logical and 6 physical cores
 
 
 ```
-| Method                      | Mean        | Error     | StdDev    |
-|---------------------------- |------------:|----------:|----------:|
-| ExecuteSynchronously        | 5,007.43 ms | 18.997 ms | 16.840 ms |
-| ExecuteOnThread             | 4,989.82 ms | 14.250 ms | 13.330 ms |
-| ExecuteOnThreadPool         | 4,988.54 ms | 26.619 ms | 23.597 ms |
-| ExecuteOnThreadPool_Tasks   | 4,952.91 ms | 16.430 ms | 13.720 ms |
-| M_ExecuteSynchronously      |   198.78 ms |  0.850 ms |  0.795 ms |
-| M_ExecuteOnThread           |    41.65 ms |  0.669 ms |  0.522 ms |
-| M_ExecuteOnThreadPool       |    29.16 ms |  0.221 ms |  0.206 ms |
-| M_ExecuteOnThreadPool_Tasks |    28.35 ms |  0.348 ms |  0.308 ms |
+| Method                      | Mean         | Error      | StdDev     |
+|---------------------------- |-------------:|-----------:|-----------:|
+| ExecuteSynchronously        | 4,966.918 ms | 24.5722 ms | 21.7826 ms |
+| ExecuteOnThread             | 5,007.381 ms | 58.6155 ms | 54.8290 ms |
+| ExecuteOnThreadPool         | 4,985.373 ms | 25.1535 ms | 21.0043 ms |
+| ExecuteOnThreadPool_Tasks   | 5,004.187 ms | 27.6760 ms | 24.5340 ms |
+| M_ExecuteSynchronously      |   198.714 ms |  0.4765 ms |  0.4224 ms |
+| M_ExecuteOnThread           |     1.149 ms |  0.0229 ms |  0.0472 ms |
+| M_ExecuteOnThreadPool       |     1.101 ms |  0.0220 ms |  0.0616 ms |
+| M_ExecuteOnThreadPool_Tasks |     1.063 ms |  0.0212 ms |  0.0448 ms |
