@@ -11,7 +11,7 @@ The code benchmarks four methods of calculating Fibonacci numbers: naive recursi
 - More functions have been added to the original course, using parallel threads on benchmark repetitions for single hash functions, and single threads with parallel for on data chuncks hash functions, for the heck of it.
 - Tests them with Moq and XUnit.
 
-### 2. Basic Async
+### 3. Basic Async
 - The project emulates an async call to a url and retries if unsuccessful.
 - Many calls were added to the original course, so that async will use multiple threads. 
 - Tests it with XUnit and MockHttp, logs TID after every request.
