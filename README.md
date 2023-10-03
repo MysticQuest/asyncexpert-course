@@ -7,5 +7,6 @@
 The code benchmarks four methods of calculating Fibonacci numbers: naive recursion, recursion with memoization (using a dictionary or list), and an iterative approach. Produces two result files (assembly & benchmarks).
 
 ### 2. Threading
-- The project benchmarks different threading strategies in .NET for computing SHA256 hashes on data chunks, using direct threading, thread pool, and task-based asynchronous pattern. Produces a result file.
+- The project benchmarks different threading strategies in .NET for computing SHA256 hashes, using direct threading, thread pool, and task-based asynchronous pattern. Produces a result file.
+- More functions have been added to the original course, using parallel threads on benchmark repetitions for single hash functions, and single threads with parallel for on data chuncks hash functions, for the heck of it.
 - Tests them with Moq and XUnit.
