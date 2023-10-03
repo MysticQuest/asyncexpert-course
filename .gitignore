@@ -410,38 +410,38 @@ FodyWeavers.xsd
 
 # Case when the project is direct child
 
-!*/bin/
-*/bin/*
-!*/bin/Release/
+#!*/bin/
+#*/bin/*
+#!*/bin/Release/
 
-*/bin/Release/*
-!*/bin/Release/BenchmarkDotNet.Artifacts/
+#*/bin/Release/*
+#!*/bin/Release/BenchmarkDotNet.Artifacts/
 
-*/bin/Release/BenchmarkDotNet.Artifacts/*
-!*/bin/Release/BenchmarkDotNet.Artifacts/results
+#*/bin/Release/BenchmarkDotNet.Artifacts/*
+#!*/bin/Release/BenchmarkDotNet.Artifacts/results
 
-*/bin/Release/BenchmarkDotNet.Artifacts/results/*
-!*/bin/Release/BenchmarkDotNet.Artifacts/results/*.md
+#*/bin/Release/BenchmarkDotNet.Artifacts/results/*
+#!*/bin/Release/BenchmarkDotNet.Artifacts/results/*.md
 
 
 # Case when the project is not direct child
 
-!*/*/
-*/*/*
-!*/*/bin/
+#!*/*/
+#*/*/*
+#!*/*/bin/
 
-!*/*/bin/
-*/*/bin/*
-!*/*/bin/Release/
+#!*/*/bin/
+#*/*/bin/*
+#!*/*/bin/Release/
 
-*/*/bin/Release/*
-!*/*/bin/Release/BenchmarkDotNet.Artifacts/
+#*/*/bin/Release/*
+#!*/*/bin/Release/BenchmarkDotNet.Artifacts/
 
-*/*/bin/Release/BenchmarkDotNet.Artifacts/*
-!*/*/bin/Release/BenchmarkDotNet.Artifacts/results
+#*/*/bin/Release/BenchmarkDotNet.Artifacts/*
+#!*/*/bin/Release/BenchmarkDotNet.Artifacts/results
 
-*/*/bin/Release/BenchmarkDotNet.Artifacts/results/*
-!*/*/bin/Release/BenchmarkDotNet.Artifacts/results/*.md
+#*/*/bin/Release/BenchmarkDotNet.Artifacts/results/*
+#!*/*/bin/Release/BenchmarkDotNet.Artifacts/results/*.md
 
 
 # Testing alternative method
