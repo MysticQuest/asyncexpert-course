@@ -199,7 +199,7 @@ namespace ThreadPoolExercises.Core
                 }
             }, token);
         }
-
+        
         public static void ExecuteOnThreadPool_ParallelTasks(Action action, int repeats, CancellationToken token = default, Action<Exception>? errorAction = null)
         {
             Task[] tasks = new Task[repeats];
