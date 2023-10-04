@@ -12,7 +12,7 @@ namespace TaskCompletionSourceExercises
 
             var process = new Process();
             process.EnableRaisingEvents = true;
-            process.StartInfo = new ProcessStartInfo(@"..\..\..\..\..\ExampleApp\bin\x64\Debug\netcoreapp3.1\ExampleApp.exe")
+            process.StartInfo = new ProcessStartInfo(@"..\..\..\..\ExampleApp\bin\Debug\net7.0\ExampleApp.exe")
             {
                 RedirectStandardOutput = true,
                 RedirectStandardError = true

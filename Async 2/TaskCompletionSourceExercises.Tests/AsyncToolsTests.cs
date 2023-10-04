@@ -10,7 +10,7 @@ namespace TaskCompletionSourceExercises.Tests
         [Fact]
         public async Task GivenExampleAppRequiringArguments_WhenNoArguments_ThenThrows()
         {
-            var path = @"..\..\..\..\..\ExampleApp\bin\x64\Debug\netcoreapp3.1\ExampleApp.exe";
+            var path = @"..\..\..\..\ExampleApp\bin\Debug\net7.0\ExampleApp.exe";
             var exception = await Record.ExceptionAsync(async () =>
                 await AsyncTools.RunProgramAsync(path));
 
@@ -22,7 +22,7 @@ namespace TaskCompletionSourceExercises.Tests
         [Fact]
         public async Task GivenExampleAppRequiringArguments_WhenHaveArguments_ThenSucceeds()
         {
-            var path = @"..\..\..\..\..\ExampleApp\bin\x64\Debug\netcoreapp3.1\ExampleApp.exe";
+            var path = @"..\..\..\..\ExampleApp\bin\Debug\net7.0\ExampleApp.exe";
 
             var result = await AsyncTools.RunProgramAsync(path, "argument");
 
