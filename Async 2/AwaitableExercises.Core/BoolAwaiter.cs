@@ -15,7 +15,7 @@ namespace AwaitableExercises.Core
     {
         private readonly bool _boolValue;
 
-        public BoolAwaiter(bool boolValue)
+        internal BoolAwaiter(bool boolValue)
         {
             _boolValue = boolValue;
         }
@@ -23,7 +23,14 @@ namespace AwaitableExercises.Core
         public bool IsCompleted => _boolValue;
         public void OnCompleted(Action continuation)
         {
-            continuation();
+            try
+            {
+                continuation();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
         public bool GetResult() => _boolValue;
     }
