@@ -1,15 +1,30 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
+using TaskCompletionSourceExercises.Core;
 
 namespace TaskCompletionSourceExercises
 {
     class Program
     {
-        static void Main(string[] args)
-        {
-            ////////////////////////////////////////////////////////////////////////////////
-            // Here is an example program presenting Process API to be used in the exercise.
+        //static void Main(string[] args)
+        //{
+        //    RunProgramSync();
+        //}
 
+        static async Task Main(string[] args)
+        {
+            await RunProgramAsync();
+        }
+
+        private static async Task RunProgramAsync()
+        {
+            var result = await AsyncTools.RunProgramAsync(@"..\..\..\..\ExampleApp\bin\Debug\net7.0\ExampleApp.exe", "argument");
+            Console.WriteLine(result);
+        }
+
+        private static void RunProgramSync()
+        {
             var process = new Process();
             process.EnableRaisingEvents = true;
             process.StartInfo = new ProcessStartInfo(@"..\..\..\..\ExampleApp\bin\Debug\net7.0\ExampleApp.exe")
