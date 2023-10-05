@@ -25,3 +25,7 @@ The code benchmarks four methods of calculating Fibonacci numbers: naive recursi
      - The project executes an external program (ExampleApp.exe) synchronously and asynchronously.
      - The async method handles and logs output and exceptions.
      - Unit tests with XUnit.
+       
+### 5. Async 3
+- The project executes mock download operations asynchronously, with a timeout delay and combined cancellation token.
+- Unit tests with XUnit and MockHttp, logs operations and exceptions. 
