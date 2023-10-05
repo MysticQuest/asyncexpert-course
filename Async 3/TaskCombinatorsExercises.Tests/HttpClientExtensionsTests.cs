@@ -14,8 +14,8 @@ namespace TaskCombinatorsExercises.Tests
         [Fact]
         public async Task GivenSingleCall_ThenSucceeds()
         {
-            var mockHttp = new MockHttpMessageHandler();
-            var mockedRequest1 = GivenDelayUrl(mockHttp, 700);
+            MockHttpMessageHandler mockHttp = new MockHttpMessageHandler();
+            IMockedRequest mockedRequest1 = GivenDelayUrl(mockHttp, 700);
 
             var result = await mockHttp.ToHttpClient().ConcurrentDownloadAsync(new[]
             {
