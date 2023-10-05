@@ -26,5 +26,12 @@ namespace TaskCombinatorsExercises.Tests
             Assert.Equal("700", result);
             Assert.Equal(1, mockHttp.GetMatchCount(mockedRequest1));
         }
+
+        private IMockedRequest GivenDelayUrl(MockHttpMessageHandler mockHttp, int delay)
+        {
+            var request = mockHttp.When(HttpMethod.Get, $"https://local/delay/{delay}")
+                                  .Respond(HttpStatusCode.OK, "text/plain", delay.ToString());
+            return request;
+        }
     }
 }
