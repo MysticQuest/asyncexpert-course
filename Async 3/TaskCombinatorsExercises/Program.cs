@@ -13,8 +13,10 @@ namespace TaskCombinatorsExercises
             using var client = new HttpClient();
             Debug("Starting operations");
 
-            var result = await client.ConcurrentDownloadAsync(new[]
+            try
             {
+                var result = await client.ConcurrentDownloadAsync(new[]
+                {
             "https://postman-echo.com/delay/3",
             "https://postman-echo.com/delay/4",
             "https://postman-echo.com/delay/5",
@@ -24,7 +26,12 @@ namespace TaskCombinatorsExercises
             "https://postman-echo.com/delay/9",
             "https://postman-echo.com/delay/2",
             }, 1_000, CancellationToken.None);
-            Debug(result);
+                Debug(result);
+            }
+            catch (TimeoutException ex)
+            {
+                Debug($"Operation timed out: {ex.Message}");
+            }
         }
 
         static void Debug(string label)
