@@ -82,13 +82,13 @@ namespace SmallConcurrentQueue
                 item = slots[i].Item;
 
                 // clear the item
-                slots[i].Item = default;
+                slots[i].Item = default!;
                 Volatile.Write(ref slots[i].SequenceNumber, currentHead + Size);
 
                 return true;
             }
 
-            item = default;
+            item = default!;
             return false;
         }
 
