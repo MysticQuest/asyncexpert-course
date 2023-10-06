@@ -47,5 +47,13 @@ namespace LowLevelExercises.Tests
             publisher.Join();
             consumer.Join();
         }
+
+        // Empty queue return test
+        [Test]
+        public void Dequeue_From_Empty_Queue_Returns_False()
+        {
+            var queue = new SmallConcurrentQueue<int>();
+            Assert.IsFalse(queue.TryDequeue(out var _));
+        }
     }
 }
