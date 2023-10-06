@@ -48,9 +48,8 @@ namespace LowLevelExercises.Tests
             consumer.Join();
         }
 
-        // Empty queue return test
         [Test]
-        public void Dequeue_From_Empty_Queue_Returns_False()
+        public void Two_Consumers_Dequeue_From_Empty_Queue_Returns_False()
         {
             var queue = new SmallConcurrentQueue<int>();
             var signal = new ManualResetEvent(false);
@@ -76,5 +75,44 @@ namespace LowLevelExercises.Tests
             consumer1.Join();
             consumer2.Join();
         }
+
+        [Test]
+        public void Two_Publishers_Cannot_Enqueue_More_Than_Capacity()
+        {
+            var queue = new SmallConcurrentQueue<int>();
+            int successfulEnqueues = 0;
+
+            var publisher1 = new Thread(() =>
+            {
+                for (int i = 0; i < SmallConcurrentQueue<int>.Size; i++)
+                {
+                    if (queue.TryEnqueue(i))
+                    {
+                        Interlocked.Increment(ref successfulEnqueues);
+                    }
+                }
+            });
+
+            var publisher2 = new Thread(() =>
+            {
+                for (int i = 0; i < SmallConcurrentQueue<int>.Size; i++)
+                {
+                    if (queue.TryEnqueue(i))
+                    {
+                        Interlocked.Increment(ref successfulEnqueues);
+                    }
+                }
+            });
+
+            publisher1.Start();
+            publisher2.Start();
+
+            publisher1.Join();
+            publisher2.Join();
+
+            Assert.AreEqual(SmallConcurrentQueue<int>.Size, successfulEnqueues);
+        }
+
+
     }
 }
