@@ -29,3 +29,8 @@ The code benchmarks four methods of calculating Fibonacci numbers: naive recursi
 ### 5. Async 3
 - The project executes mock download operations asynchronously, with a timeout delay and combined cancellation token.
 - Unit tests with XUnit and MockHttp, logs operations and exceptions. 
+
+### 6. Low-Level Concurrency
+- The project tests a concurrent queue and a class with number calculations against a multithreaded environment.
+- Locks have been replaced with Volatile/Interlocked and more tests have been added for the queue. 
+- Unit tests with NUnit.
