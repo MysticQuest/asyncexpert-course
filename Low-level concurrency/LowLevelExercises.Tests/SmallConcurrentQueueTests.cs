@@ -82,8 +82,11 @@ namespace LowLevelExercises.Tests
             var queue = new SmallConcurrentQueue<int>();
             int successfulEnqueues = 0;
 
+            var manualResetEvent = new ManualResetEvent(false);
+
             var publisher1 = new Thread(() =>
             {
+                manualResetEvent.WaitOne();
                 for (int i = 0; i < SmallConcurrentQueue<int>.Size; i++)
                 {
                     if (queue.TryEnqueue(i))
@@ -95,6 +98,7 @@ namespace LowLevelExercises.Tests
 
             var publisher2 = new Thread(() =>
             {
+                manualResetEvent.WaitOne();
                 for (int i = 0; i < SmallConcurrentQueue<int>.Size; i++)
                 {
                     if (queue.TryEnqueue(i))
@@ -107,12 +111,12 @@ namespace LowLevelExercises.Tests
             publisher1.Start();
             publisher2.Start();
 
+            manualResetEvent.Set();
+
             publisher1.Join();
             publisher2.Join();
 
             Assert.AreEqual(SmallConcurrentQueue<int>.Size, successfulEnqueues);
         }
-
-
     }
 }
