@@ -53,7 +53,28 @@ namespace LowLevelExercises.Tests
         public void Dequeue_From_Empty_Queue_Returns_False()
         {
             var queue = new SmallConcurrentQueue<int>();
-            Assert.IsFalse(queue.TryDequeue(out var _));
+            var signal = new ManualResetEvent(false);
+
+            var consumer1 = new Thread(() =>
+            {
+                signal.WaitOne();
+                Assert.IsFalse(queue.TryDequeue(out var _));
+            });
+
+            var consumer2 = new Thread(() =>
+            {
+                signal.WaitOne();
+                Assert.IsFalse(queue.TryDequeue(out var _));
+            });
+
+            consumer1.Start();
+            consumer2.Start();
+
+            // signals the threads to start
+            signal.Set();
+
+            consumer1.Join();
+            consumer2.Join();
         }
     }
 }
