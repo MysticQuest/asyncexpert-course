@@ -10,7 +10,7 @@ namespace Synchronization.Tests
         [Fact]
         public async Task GivenExampleApp_WhenLocalExclusiveScope_ThenSucceeds()
         {
-            var path = @"..\..\..\..\..\Synchronization\bin\x64\Debug\netcoreapp3.1\Synchronization.exe";
+            var path = @"..\..\..\..\Synchronization\bin\Debug\net7.0\Synchronization.exe";
 
             var result = await RunProgramAsync(path, "name false");
 
@@ -20,7 +20,7 @@ namespace Synchronization.Tests
         [Fact]
         public async Task GivenExampleApp_WhenSingleGlobalExclusiveScope_ThenSucceeds()
         {
-            var path = @"..\..\..\..\..\Synchronization\bin\x64\Debug\netcoreapp3.1\Synchronization.exe";
+            var path = @"..\..\..\..\Synchronization\bin\Debug\net7.0\Synchronization.exe";
 
             var result = await RunProgramAsync(path, "name true");
 
@@ -31,7 +31,7 @@ namespace Synchronization.Tests
         public async Task GivenExampleApp_WhenDoubleGlobalExclusiveScope_ThenThrows()
         {
             var scopeName = "someScopeName";
-            var path = @"..\..\..\..\..\Synchronization\bin\x64\Debug\netcoreapp3.1\Synchronization.exe";
+            var path = @"..\..\..\..\Synchronization\bin\Debug\net7.0\Synchronization.exe";
             var firstRunTask = RunProgramAsync(path, $"{scopeName} true");
             var exception = await Record.ExceptionAsync(async () =>
                 await RunProgramAsync(path, $"{scopeName} true"));

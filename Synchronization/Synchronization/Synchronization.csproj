@@ -7,4 +7,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Synchronization.Core\Synchronization.Core.csproj" />
+  </ItemGroup>
+
 </Project>
