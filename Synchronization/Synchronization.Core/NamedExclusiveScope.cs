@@ -1,14 +1,25 @@
 ﻿using System;
+using System.Diagnostics.Metrics;
 using System.Threading;
 
 namespace Synchronization.Core
 {
-    public class NamedExclusiveScope : IDisposable
+    /*
+ * Implement very simple wrapper around Mutex or Semaphore (remember both implement WaitHandle) to
+ * provide a exclusive region created by `using` clause.
+ *
+ * Created region may be system-wide or not, depending on the constructor parameter.
+ *
+ * Any try to get a second systemwide scope should throw an `System.InvalidOperationException` with `Unable to get a global lock {name}.`
+ */
+
+
+    public class NamedExclusiveSemaphoreScope : IDisposable
     {
         private readonly Semaphore semaphore;
         private bool hasHandle = false;
 
-        public NamedExclusiveScope(string name, bool isSystemWide)
+        public NamedExclusiveSemaphoreScope(string name, bool isSystemWide)
         {
             if (isSystemWide)
             {
@@ -34,6 +45,46 @@ namespace Synchronization.Core
                 semaphore.Release();
             }
             semaphore.Dispose();
+        }
+    }
+
+
+    public class NamedExclusiveMutexScope : IDisposable
+    {
+        private readonly Mutex mutex;
+        private readonly WaitHandle waitHandle;
+        private bool hasHandle = false;
+
+        public NamedExclusiveMutexScope(string name, bool isSystemWide)
+        {
+            if (isSystemWide)
+            {
+                mutex = new Mutex(false, name, out bool createdNew);
+                hasHandle = mutex.WaitOne(0);
+
+                if (!createdNew && !hasHandle)
+                {
+                    throw new InvalidOperationException($"Unable to get a global lock {name}.");
+                }
+
+                waitHandle = mutex;
+            }
+            else
+            {
+                Mutex mutex = new Mutex();
+                hasHandle = mutex.WaitOne(0);
+                waitHandle = mutex;
+            }
+        }
+
+        public void Dispose()
+        {
+            if (hasHandle)
+            {
+                mutex.ReleaseMutex();
+            }
+
+            waitHandle.Dispose();
         }
     }
 }
