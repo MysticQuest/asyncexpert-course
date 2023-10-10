@@ -28,21 +28,38 @@ namespace Synchronization.Tests
         }
 
         [Fact]
-        public async Task GivenExampleApp_WhenDoubleGlobalExclusiveScope_ThenThrows()
+        public async Task GivenExampleApp_WhenDoubleGlobalExclusiveSemaphoreScope_ThenThrows()
         {
             var scopeName = "someScopeName";
             var path = @"..\..\..\..\Synchronization\bin\Debug\net7.0\Synchronization.exe";
-            var firstRunTask = RunProgramAsync(path, $"{scopeName} true");
-            var exception = await Record.ExceptionAsync(async () =>
-                await RunProgramAsync(path, $"{scopeName} true"));
+            var args = $"{scopeName}_semaphore {scopeName}_mutex true";
+
+            var firstRunTask = RunProgramAsync(path, args);
+            var exception = await Record.ExceptionAsync(async () => await RunProgramAsync(path, args));
             await firstRunTask;
 
             Assert.NotNull(exception);
             Assert.IsType<Exception>(exception);
-            Assert.StartsWith($"Unhandled exception. System.InvalidOperationException: Unable to get a global lock {scopeName}.",
-                exception.Message);
-
+            Assert.StartsWith($"Unhandled exception. System.InvalidOperationException: Unable to get a global lock {scopeName}_semaphore.", exception.Message);
         }
+
+        [Fact]
+        public async Task GivenExampleApp_WhenDoubleGlobalExclusiveMutexScope_ThenThrows()
+        {
+            var scopeName = "someScopeName";
+            var path = @"..\..\..\..\Synchronization\bin\Debug\net7.0\Synchronization.exe";
+            var args = $"{scopeName}_mutex {scopeName}_mutex true";
+
+            var firstRunTask = RunProgramAsync(path, args);
+            var exception = await Record.ExceptionAsync(async () => await RunProgramAsync(path, args));
+            await firstRunTask;
+
+            Assert.NotNull(exception);
+            Assert.IsType<Exception>(exception);
+            Assert.StartsWith($"Unhandled exception. System.InvalidOperationException: Unable to get a global lock {scopeName}_mutex.", exception.Message);
+        }
+
+
 
         public static Task<string> RunProgramAsync(string path, string args = "")
         {
