@@ -34,3 +34,8 @@ The code benchmarks four methods of calculating Fibonacci numbers: naive recursi
 - The project tests a concurrent queue and a class with number calculations against a multithreaded environment.
 - Locks have been replaced with Volatile/Interlocked and more tests have been added for the queue. 
 - Unit tests with NUnit.
+
+### 7. Synchronization
+- The project implements Mutex and Semaphore synchronization primitives within custom wrapper classes for managing resource access.
+- Defines their scope with the "using" keyword. Uses system-wide or localized synchronization.
+- Unit tests with XUnit.
