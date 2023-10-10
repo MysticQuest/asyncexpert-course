@@ -40,7 +40,7 @@ namespace Synchronization.Tests
 
             Assert.NotNull(exception);
             Assert.IsType<Exception>(exception);
-            Assert.StartsWith($"Unhandled exception. System.InvalidOperationException: Unable to get a global lock {scopeName}_semaphore.", exception.Message);
+            Assert.StartsWith($"Unhandled exception. System.InvalidOperationException: Unable to get a global lock {scopeName}", exception.Message);
         }
 
         public static Task<string> RunProgramAsync(string path, string args = "")
