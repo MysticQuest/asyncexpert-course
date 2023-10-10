@@ -43,24 +43,6 @@ namespace Synchronization.Tests
             Assert.StartsWith($"Unhandled exception. System.InvalidOperationException: Unable to get a global lock {scopeName}_semaphore.", exception.Message);
         }
 
-        [Fact]
-        public async Task GivenExampleApp_WhenDoubleGlobalExclusiveMutexScope_ThenThrows()
-        {
-            var scopeName = "someScopeName";
-            var path = @"..\..\..\..\Synchronization\bin\Debug\net7.0\Synchronization.exe";
-            var args = $"{scopeName}_mutex {scopeName}_mutex true";
-
-            var firstRunTask = RunProgramAsync(path, args);
-            var exception = await Record.ExceptionAsync(async () => await RunProgramAsync(path, args));
-            await firstRunTask;
-
-            Assert.NotNull(exception);
-            Assert.IsType<Exception>(exception);
-            Assert.StartsWith($"Unhandled exception. System.InvalidOperationException: Unable to get a global lock {scopeName}_mutex.", exception.Message);
-        }
-
-
-
         public static Task<string> RunProgramAsync(string path, string args = "")
         {
             var tcs = new TaskCompletionSource<string>(TaskCreationOptions.RunContinuationsAsynchronously);

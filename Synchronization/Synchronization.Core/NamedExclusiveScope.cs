@@ -58,10 +58,19 @@ namespace Synchronization.Core
         {
             if (isSystemWide)
             {
-                mutex = new Mutex(false, name, out bool createdNew);
+                if (!Mutex.TryOpenExisting(name, out mutex))
+                {
+                    try
+                    {
+                        mutex = new Mutex(false, name, out bool createdNew);
+                    }
+                    catch (WaitHandleCannotBeOpenedException)
+                    {
+                        throw new InvalidOperationException($"Unable to get a global lock {name}.");
+                    }
+                }
                 hasHandle = mutex.WaitOne(0);
-
-                if (!createdNew && !hasHandle)
+                if (!hasHandle)
                 {
                     throw new InvalidOperationException($"Unable to get a global lock {name}.");
                 }

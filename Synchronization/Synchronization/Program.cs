@@ -10,7 +10,7 @@ namespace Synchronization
         {
             var scopeSemaphoreName = "defaultSemaphore";
             var scopeMutexName = "defaultMutex";
-            var isSystemWide = false;
+            var isSystemWide = true;
             if (args.Length == 3)
             {
                 scopeSemaphoreName = args[0];
@@ -23,6 +23,7 @@ namespace Synchronization
                 Console.WriteLine("With Semaphore");
                 Thread.Sleep(300);
             }
+
             using (new NamedExclusiveMutexScope(scopeMutexName, isSystemWide))
             {
                 Console.WriteLine("Hello world!");
