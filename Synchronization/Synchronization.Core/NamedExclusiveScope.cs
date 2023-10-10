@@ -51,7 +51,7 @@ namespace Synchronization.Core
 
     public class NamedExclusiveMutexScope : IDisposable
     {
-        private readonly Mutex mutex;
+        private readonly Mutex? mutex;
         private readonly WaitHandle waitHandle;
         private bool hasHandle = false;
 
@@ -71,7 +71,7 @@ namespace Synchronization.Core
             }
             else
             {
-                Mutex mutex = new Mutex();
+                mutex = new Mutex();
                 hasHandle = mutex.WaitOne(0);
                 waitHandle = mutex;
             }
@@ -81,9 +81,15 @@ namespace Synchronization.Core
         {
             if (hasHandle)
             {
-                mutex.ReleaseMutex();
+                if (waitHandle is Mutex)
+                {
+                    mutex?.ReleaseMutex();
+                }
+                else if (waitHandle is Mutex mutex)
+                {
+                    mutex.ReleaseMutex();
+                }
             }
-
             waitHandle.Dispose();
         }
     }

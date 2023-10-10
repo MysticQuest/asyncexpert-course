@@ -14,7 +14,7 @@ namespace Synchronization.Tests
 
             var result = await RunProgramAsync(path, "name false");
 
-            Assert.Equal("Hello world!\r\n", result);
+            Assert.Equal("Hello world!\r\nWith Semaphore\r\nHello world!\r\nWith Mutex\r\n", result);
         }
 
         [Fact]
@@ -24,7 +24,7 @@ namespace Synchronization.Tests
 
             var result = await RunProgramAsync(path, "name true");
 
-            Assert.Equal("Hello world!\r\n", result);
+            Assert.Equal("Hello world!\r\nWith Semaphore\r\nHello world!\r\nWith Mutex\r\n", result);
         }
 
         [Fact]
