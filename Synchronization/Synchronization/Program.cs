@@ -11,11 +11,11 @@ namespace Synchronization
             var scopeSemaphoreName = "defaultSemaphore";
             var scopeMutexName = "defaultMutex";
             var isSystemWide = false;
-            if (args.Length == 2)
+            if (args.Length == 3)
             {
                 scopeSemaphoreName = args[0];
-                scopeMutexName = args[0];
-                isSystemWide = bool.Parse(args[1]);
+                scopeMutexName = args[1];
+                isSystemWide = bool.Parse(args[2]);
             }
             using (new NamedExclusiveSemaphoreScope(scopeSemaphoreName, isSystemWide))
             {

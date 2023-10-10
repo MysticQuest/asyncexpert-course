@@ -52,7 +52,6 @@ namespace Synchronization.Core
     public class NamedExclusiveMutexScope : IDisposable
     {
         private readonly Mutex? mutex;
-        private readonly WaitHandle waitHandle;
         private bool hasHandle = false;
 
         public NamedExclusiveMutexScope(string name, bool isSystemWide)
@@ -66,14 +65,11 @@ namespace Synchronization.Core
                 {
                     throw new InvalidOperationException($"Unable to get a global lock {name}.");
                 }
-
-                waitHandle = mutex;
             }
             else
             {
                 mutex = new Mutex();
                 hasHandle = mutex.WaitOne(0);
-                waitHandle = mutex;
             }
         }
 
@@ -81,16 +77,9 @@ namespace Synchronization.Core
         {
             if (hasHandle)
             {
-                if (waitHandle is Mutex)
-                {
-                    mutex?.ReleaseMutex();
-                }
-                else if (waitHandle is Mutex mutex)
-                {
-                    mutex.ReleaseMutex();
-                }
+                mutex?.ReleaseMutex();
             }
-            waitHandle.Dispose();
+            mutex?.Dispose();
         }
     }
 }
