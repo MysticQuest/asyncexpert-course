@@ -39,3 +39,8 @@ The code benchmarks four methods of calculating Fibonacci numbers: naive recursi
 - The project implements Mutex and Semaphore synchronization primitives within custom wrapper classes for managing resource access.
 - Defines their scope with the "using" keyword. Uses system-wide or localized synchronization.
 - Unit tests with XUnit.
+
+### 8. Concurrent Data Structures
+- The project implements atomic operations on a Dictionary and ConcurrentDictionary. 
+- Compares lock-based Dictionary and ConcurrentDictionary operations and ConcurrentDictionary that delegates the operations to a lock-free atomic counter class.  
+- Unit tests with NUnit.
