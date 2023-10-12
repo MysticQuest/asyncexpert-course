@@ -12,22 +12,22 @@ namespace DataStructures.Tests
         where TMetricCounter : IMetricsCounter, new()
     {
         const int KeyCount = 16;
-        const int ValueCount = 100000;
+        const int ValueCount = 1000000;
         const int ConcurrentWriters = 2;
 
         [Test]
         public async Task CountingTest()
         {
-            var originalKeys = Enumerable.Range(0, KeyCount).Select(i => i.ToString()).ToArray();
-            var keys = Enumerable.Repeat(originalKeys, ConcurrentWriters).SelectMany(m => m).ToArray();
+            string[] originalKeys = Enumerable.Range(0, KeyCount).Select(i => i.ToString()).ToArray();
+            string[] keys = Enumerable.Repeat(originalKeys, ConcurrentWriters).SelectMany(m => m).ToArray();
 
-            var starter = new TaskCompletionSource<object>();
+            var starterTCS = new TaskCompletionSource<object>();
             var counter = new TMetricCounter();
 
             // run two tasks per key
-            var tasks = keys.Select(key => Task.Run(async () =>
+            Task[] tasks = keys.Select(key => Task.Run(async () =>
             {
-                await starter.Task;
+                await starterTCS.Task;
                 for (var i = 0; i < ValueCount; i++)
                 {
                     counter.Increment(key);
@@ -35,7 +35,7 @@ namespace DataStructures.Tests
             })).ToArray();
 
             // start it
-            starter.SetResult(starter);
+            starterTCS.SetResult(starterTCS);
             await Task.WhenAll(tasks).ConfigureAwait(false);
 
             // assert
@@ -48,6 +48,11 @@ namespace DataStructures.Tests
             }
 
             CollectionAssert.IsEmpty(toObserve);
+
+            foreach (var (key, count) in counter)
+            {
+                TestContext.WriteLine($"{key}: {count}");
+            }
         }
     }
 }
