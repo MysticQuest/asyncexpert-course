@@ -41,6 +41,6 @@ The code benchmarks four methods of calculating Fibonacci numbers: naive recursi
 - Unit tests with XUnit.
 
 ### 8. Concurrent Data Structures
-- The project implements atomic operations on a Dictionary and ConcurrentDictionary. 
-- Compares lock-based Dictionary and ConcurrentDictionary operations and ConcurrentDictionary that delegates the operations to a lock-free atomic counter class.  
+- The project implements atomic operations on a Dictionary and a ConcurrentDictionary. 
+- Compares lock-based Dictionary and ConcurrentDictionary operations, as well as ConcurrentDictionary that delegates the operations to a lock-free atomic counter class.  
 - Unit tests with NUnit.
