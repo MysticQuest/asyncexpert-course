@@ -51,7 +51,7 @@ namespace DataStructures.Tests
 
             foreach (var (key, count) in counter)
             {
-                TestContext.WriteLine($"{key}: {count}");
+                TestContext.WriteLine($"Type: {typeof(TMetricCounter).Name}, Key: {key}, Count: {count}");
             }
         }
     }
