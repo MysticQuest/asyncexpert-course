@@ -15,15 +15,13 @@ namespace DataStructures
 
         public IEnumerator<KeyValuePair<string, int>> GetEnumerator()
         {
-            throw new System.NotImplementedException();
+            return counters.GetEnumerator();
         }
+
 
         public void Increment(string key)
         {
-            if (counters.TryGetValue(key, out var counter))
-            {
-                counters.TryUpdate(key, counter + 1, counter);
-            }
+            counters.AddOrUpdate(key, 1, (k, oldVal) => oldVal + 1);
         }
 
         IEnumerator IEnumerable.GetEnumerator()
