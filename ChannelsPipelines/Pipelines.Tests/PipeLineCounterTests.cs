@@ -11,7 +11,7 @@ namespace Pipelines.Tests
         [Fact]
         public async Task CountLines()
         {
-            var url = new Uri("https://www.w3.org/TR/PNG/iso_8859-1.txt");
+            var url = new Uri("https://w3c.github.io/PNG-spec/");
             var expected = (await GetBody(url)).Count(x => x == '\n');
 
             var pipelinesCounter = new PipeLineCounter();
