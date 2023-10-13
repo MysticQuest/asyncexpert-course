@@ -44,3 +44,9 @@ The code benchmarks four methods of calculating Fibonacci numbers: naive recursi
 - The project implements atomic operations on a Dictionary and a ConcurrentDictionary. 
 - Compares lock-based Dictionary and ConcurrentDictionary operations, as well as ConcurrentDictionary that delegates the operations to a lock-free atomic counter class.  
 - Unit tests with NUnit.
+
+### 9. Pipelines and Channels
+- The project implements a pipeline model for processing data streams using System.IO.Pipelines.
+- Uses Pipe, PipeWriter, and PipeReader along with SequenceReader for reading from a network stream and counting lines concurrently.
+- Unit tests with XUnit.
+
