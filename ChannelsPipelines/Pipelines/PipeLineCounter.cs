@@ -57,17 +57,7 @@ namespace Pipelines
             {
                 var result = await reader.ReadAsync();
                 var buffer = result.Buffer;
-                var position = buffer.Start;
-
-                while (buffer.TryGet(ref position, out var memory))
-                {
-                    var sequenceReader = new SequenceReader<byte>(new ReadOnlySequence<byte>(memory));
-                    while (sequenceReader.TryReadTo(out ReadOnlySpan<byte> line, (byte)'\n'))
-                    {
-                        lineCount++;
-                    }
-                }
-
+                lineCount += CountLinesInBuffer(buffer);
                 reader.AdvanceTo(buffer.End);
                 if (result.IsCompleted)
                 {
@@ -75,6 +65,23 @@ namespace Pipelines
                 }
             }
             await reader.CompleteAsync();
+            return lineCount;
+        }
+
+        private int CountLinesInBuffer(in ReadOnlySequence<byte> buffer)
+        {
+            int lineCount = 0;
+            foreach (var segment in buffer)
+            {
+                var span = segment.Span;
+                for (var i = 0; i < span.Length; i++)
+                {
+                    if (span[i] == '\n')
+                    {
+                        lineCount++;
+                    }
+                }
+            }
             return lineCount;
         }
     }
